@@ -16,7 +16,7 @@ enum anne_pro_layers {
   _FN_LAYER,
 };
 
-const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*
   * Layer _BASE_LAYER
   * ,-----------------------------------------------------------------------------------------.
@@ -136,7 +136,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else {
             // when keycode QMKBEST is released
         }
-        break;
+        return(false);
 
     case MRKUSURL:
         if (record->event.pressed) {
@@ -145,14 +145,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         } else {
             // when keycode QMKURL is released
         }
-        break;
-
-    case MRKUSOTHER:
-        if (record->event.pressed) {
-           SEND_STRING(SS_LCTL("ac")); // selects all and copies
-        }
-        break;
+        return(false);
     }
+
     return true;
 };
 
