@@ -9,36 +9,6 @@ enum custom_keycodes {
     MRKUSOTHER,
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case MRKUSVERSION:
-        if (record->event.pressed) {
-            // when keycode QMKBEST is pressed
-            SEND_STRING("Mrkus QMK version 1");
-        } else {
-            // when keycode QMKBEST is released
-        }
-        break;
-
-    case MRKUSURL:
-        if (record->event.pressed) {
-            // when keycode QMKURL is pressed
-            SEND_STRING("https://qmk.fm/\n");
-        } else {
-            // when keycode QMKURL is released
-        }
-        break;
-
-    case MRKUSOTHER:
-        if (record->event.pressed) {
-           SEND_STRING(SS_LCTL("ac")); // selects all and copies
-        }
-        break;
-    }
-    return true;
-};
-
-
 enum anne_pro_layers {
   _BASE_LAYER,
   _MAC_LAYER,
@@ -157,6 +127,34 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 const uint16_t keymaps_size = sizeof(keymaps);
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case MRKUSVERSION:
+        if (record->event.pressed) {
+            // when keycode QMKBEST is pressed
+            SEND_STRING("Mrkus QMK version 1\n");
+        } else {
+            // when keycode QMKBEST is released
+        }
+        break;
+
+    case MRKUSURL:
+        if (record->event.pressed) {
+            // when keycode QMKURL is pressed
+            SEND_STRING("https://qmk.fm/\n");
+        } else {
+            // when keycode QMKURL is released
+        }
+        break;
+
+    case MRKUSOTHER:
+        if (record->event.pressed) {
+           SEND_STRING(SS_LCTL("ac")); // selects all and copies
+        }
+        break;
+    }
+    return true;
+};
 
 void matrix_init_user(void) {
 
