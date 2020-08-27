@@ -11,7 +11,7 @@ enum anne_pro_layers {
 
 
 enum custom_keycodes {
-    QMKBEST = AP2_SAFE_2,
+    QMKBEST = AP2_SAFE_TO,
     QMKURL,
     MY_OTHER_MACRO,
 };
