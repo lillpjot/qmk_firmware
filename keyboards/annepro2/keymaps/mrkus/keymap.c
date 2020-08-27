@@ -6,7 +6,6 @@
 enum custom_keycodes {
     MRV = SAFE_RANGE,
     MURL,
-    MOTHER,
 };
 
 enum anne_pro_layers {
@@ -128,28 +127,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t keymaps_size = sizeof(keymaps);
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case MRV:
-        if (record->event.pressed) {
-            // when keycode QMKBEST is pressed
-            SEND_STRING("Mrkus QMK version 1\n");
-        } else {
-            // when keycode QMKBEST is released
+    if (record->event.pressed) {
+        switch(keycode) {
+            case MRV:
+                SEND_STRING("QMK is the best thing ever!"); // this is our macro!
+                return false;
         }
-        return false;
-
-    case MURL:
-        if (record->event.pressed) {
-            // when keycode QMKURL is pressed
-            SEND_STRING("https://qmk.fm/\n");
-        } else {
-            // when keycode QMKURL is released
-        }
-        return false;
     }
-
     return true;
-}
+};
+
+
 
 void matrix_init_user(void) {
 
