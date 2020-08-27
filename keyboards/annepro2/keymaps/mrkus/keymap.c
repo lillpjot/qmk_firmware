@@ -3,16 +3,16 @@
 #include "qmk_ap2_led.h"
 
 
-enum custom_keycodes {
-    MRV = SAFE_RANGE,
-    MURL,
-};
 
 enum anne_pro_layers {
   _BASE_LAYER,
   _MAC_LAYER,
   _ARROW_LAYER,
   _FN_LAYER,
+};
+
+enum custom_keycodes {
+    MRV = SAFE_RANGE,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
