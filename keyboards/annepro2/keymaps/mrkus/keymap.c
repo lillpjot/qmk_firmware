@@ -4,9 +4,9 @@
 
 
 enum custom_keycodes {
-    MRKUSVERSION = SAFE_RANGE,
-    MRKUSURL,
-    MRKUSOTHER,
+    MRV = SAFE_RANGE,
+    MURL,
+    MOTHER,
 };
 
 enum anne_pro_layers {
@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_HOME, KC_END,  KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PGUP, KC_PGDN,         KC_TRNS,
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MRKUSVERSION, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INSERT, KC_DELETE, KC_TRNS,
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MRV    , MURL   , KC_TRNS, KC_TRNS, KC_TRNS, KC_INSERT, KC_DELETE, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS,      KC_BSPC,             KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS
   ),
   /* Layer _FN_LAYER
@@ -129,27 +129,27 @@ const uint16_t keymaps_size = sizeof(keymaps);
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case MRKUSVERSION:
+    case MRV:
         if (record->event.pressed) {
             // when keycode QMKBEST is pressed
             SEND_STRING("Mrkus QMK version 1\n");
         } else {
             // when keycode QMKBEST is released
         }
-        return(false);
+        return false;
 
-    case MRKUSURL:
+    case MURL:
         if (record->event.pressed) {
             // when keycode QMKURL is pressed
             SEND_STRING("https://qmk.fm/\n");
         } else {
             // when keycode QMKURL is released
         }
-        return(false);
+        return false;
     }
 
     return true;
-};
+}
 
 void matrix_init_user(void) {
 
