@@ -37,5 +37,6 @@ enum custom_keys {
     KC_AP_LED_ON = AP2_SAFE_RANGE,
     KC_AP_LED_OFF,
     KC_AP_LED_NEXT_PROFILE,
-    KC_AP_LED_PREV_PROFILE
+    KC_AP_LED_PREV_PROFILE,
+    AP2_SAFE_TO,
 };
