@@ -24,14 +24,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_LBRC:
         if ((record->event.pressed)) {
             if (get_mods() & MOD_MASK_RALT) {
-              unregister_code(KC_RALT);
-              SEND_STRING(";");
+              //unregister_code(KC_RALT);
+              SEND_STRING("8");
               return false;
-            } else {
+            } else { 
               return true;
             }
         }
-        return false;
+        return true;
         break;
     case QMKBEST:
         if (record->event.pressed) {
