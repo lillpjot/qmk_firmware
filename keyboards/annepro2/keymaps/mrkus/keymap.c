@@ -19,10 +19,12 @@ enum custom_keycodes {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
     case KC_LBRC:
-        if ((record->event.pressed) && keyboard_report->mods & MOD_BIT(KC_RALT)) {
+        if ((record->event.pressed) && (keyboard_report->mods & MOD_BIT(KC_RALT))) {
             unregister_code(KC_RALT);
             SEND_STRING(";");
         }
+
+        break;
     case QMKBEST:
         if (record->event.pressed) {
             // when keycode QMKBEST is pressed
