@@ -26,7 +26,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (get_mods() & MOD_MASK_RALT) {
               unregister_code(KC_RALT);
               SEND_STRING(";");
-              reurn false;
+              return false;
             } else {
               return true;
             }
