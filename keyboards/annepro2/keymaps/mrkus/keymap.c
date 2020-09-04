@@ -16,6 +16,9 @@ enum custom_keycodes {
     MY_OTHER_MACRO,
 };
 
+#define MOD_MASK_RALT   (MOD_BIT(KC_RALT))
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
     case KC_LBRC:
