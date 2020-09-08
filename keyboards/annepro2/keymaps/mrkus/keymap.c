@@ -5,7 +5,7 @@
 enum anne_pro_layers {
   _BASE_LAYER,
   _MAC_LAYER,
-  _COLMAK_BASE,
+  _COLEMAK_BASE,
   _ARROW_LAYER,
   _FN_LAYER,
 };
