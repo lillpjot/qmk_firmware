@@ -217,6 +217,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t keymaps_size = sizeof(keymaps);
 
 void matrix_init_user(void) {
+    set_unicode_input_mode(UC_LNX);
 }
 
 void matrix_scan_user(void) {
