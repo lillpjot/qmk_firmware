@@ -5,6 +5,7 @@
 enum anne_pro_layers {
   _BASE_LAYER,
   _MAC_LAYER,
+  _COLMAK_BASE,
   _ARROW_LAYER,
   _FN_LAYER,
 };
@@ -17,6 +18,15 @@ enum custom_keycodes {
 };
 
 #define MOD_MASK_RALT   (MOD_BIT(KC_RALT))
+#define MOD_MASK_RALT_SHIFT   (MOD_BIT(KC_RALT))
+
+#define MODS_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
+#define MODS_CTRL_MASK   (MOD_BIT(KC_LCTL)|MOD_BIT(KC_RCTRL))
+#define MODS_ALT_MASK    (MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
+#define MODS_GUI_MASK    (MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI))
+
+
+
 
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -33,6 +43,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return true;
         break;
+    case KC_RBRC:
+        if ((record->event.pressed)) {
+            if (get_mods() & MOD_MASK_RALT) {
+              //unregister_code(KC_RALT);
+              SEND_STRING("9");
+              return false;
+            } else { 
+              return true;
+            }
+        }
+        return true;
     case QMKBEST:
         if (record->event.pressed) {
             // when keycode QMKBEST is pressed
@@ -146,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
   [_ARROW_LAYER] = KEYMAP( /* Base */
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
-    KC_TRNS, S(C(KC_TAB)), C(KC_TAB), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_HOME, KC_END,  KC_TRNS,
+    KC_TRNS, S(C(KC_TAB)), C(KC_TAB), KC_TRNS, KC_TRNS, KC_TRNS, KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_TRNS, U(0x00E5), KC_TRNS,  KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PGUP, KC_PGDN,         KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, QMKURL    , KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_INSERT, KC_DELETE, KC_TRNS,
     KC_TRNS, KC_TRNS, KC_TRNS,      KC_BSPC,             KC_TRNS,  KC_TRNS,  KC_TRNS, KC_TRNS
@@ -169,7 +190,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_AP2_BT_UNPAIR, KC_AP2_BT1, KC_AP2_BT2, KC_AP2_BT3, KC_AP2_BT4, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_HOME, KC_END,  KC_AP_LED_ON,
     KC_CAPS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_PGUP, KC_PGDN,         KC_AP_LED_OFF,
     KC_TRNS,KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, QMKBEST, KC_INSERT, KC_DELETE, KC_TRNS,
-    KC_TRNS,KC_TRNS, KC_TRNS,      KC_TRNS,             KC_TRNS,  KC_TRNS,  DF(_MAC_LAYER), DF(_BASE_LAYER)
+    KC_TRNS,KC_TRNS, KC_TRNS,      KC_TRNS,            DF(_COLEMAK_BASE),  KC_TRNS,  DF(_MAC_LAYER), DF(_BASE_LAYER)
+  ),
+  /* Layer _BASE_LAYER
+  * ,-----------------------------------------------------------------------------------------.
+  * |  `  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  0  |  -  |  =  |    Bksp   |
+  * |-----------------------------------------------------------------------------------------+
+  * | Tab    |  q  |  w  |  e  |  r  |  t  |  y  |  u  |  i  |  o  |  p  |  [  |  ]  |   \    |
+  * |-----------------------------------------------------------------------------------------+
+  * | esc     |  a  |  s  |  d  |  f  |  g  |  h  |  j  |  k  |  l  |  ;  |  '  |    Enter    |
+  * |-----------------------------------------------------------------------------------------+
+  * | Shift      |  z  |  x  |  c  |  v  |  b  |  n  |  m  |  ,  |  .  |  /  |    Shift       |
+  * |-----------------------------------------------------------------------------------------+
+  * | Ctrl  |  L1   |  Alt  |               space             |  Alt  |  FN1  |  R1   | Ctrl  |
+  * \-----------------------------------------------------------------------------------------/ */
+
+  [_COLEMAK_BASE] = KEYMAP( /* Colemak Base */
+    KC_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL,   KC_BSPC,
+    KC_TAB, KC_Q, KC_W, KC_F, KC_P, KC_G, KC_J, KC_L, KC_U, KC_Y, KC_SCLN, KC_LBRC, KC_RBRC,  KC_NUBS,
+    LT(_ARROW_LAYER, KC_ESC), KC_A, KC_R, KC_S, KC_T, KC_D, KC_H, KC_N, KC_E, KC_I, KC_O, KC_QUOT,         KC_ENT,
+    KC_LSFT,KC_Z, KC_X, KC_C, KC_V, KC_B, KC_K, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+    KC_LCTL,KC_LGUI, KC_LALT,      KC_SPC,             KC_RALT,  MO(_FN_LAYER),  KC_RGUI, KC_RCTL
   ),
 };
 
